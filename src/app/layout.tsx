@@ -3,6 +3,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import ThemeTogglebutton from "@/components/ui/ThemeToggle";
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <ThemeTogglebutton className="absolute top-2 right-6" />
           {children}
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>

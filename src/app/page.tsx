@@ -3,30 +3,33 @@
 import React, { useState } from "react";
 import CodeEditor from "@/components/Codeeditor";
 import { Button } from "@/components/ui/button";
-import { codeConvert } from "./actions";
-import { readStreamableValue } from "ai/rsc";
-
+import Markdown from "react-markdown";
+import { toast } from "sonner";
+import { z } from "zod";
+import { experimental_useObject as useObject } from "ai/react";
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
 const App = () => {
+  const { object, submit, isLoading, error } = useObject({
+    api: "/api/codegen",
+    schema: z.object({
+      code: z.string(),
+      explanation: z.string(),
+    }),
+  });
   const [sourceCode, setSourceCode] = useState("// Write your code here");
   const [generation, setGeneration] = useState<string>("");
+  const [translatedCode, setTranslatedCode] = useState<string>();
   const [sourceLanguage, setSourceLanguage] = useState("javascript");
+  const [loading, setLoading] = useState(false);
   const [translatedLanguage, setTranslatedLanguage] = useState("javascript");
 
-  const handleTranslate = async () => {
-    console.log("Translating code...", sourceCode);
-    const { output } = await codeConvert(
-      sourceCode,
-      sourceLanguage,
-      translatedLanguage
-    );
-
-    for await (const delta of readStreamableValue(output)) {
-      setGeneration((currentGeneration) => `${currentGeneration}${delta}`);
-    }
-  };
+  const prompted = ` convert this code from ${sourceLanguage} to ${translatedLanguage} : \n ${sourceCode}`;
+  
+  if (error) {
+    toast.error("Failed to generate code");
+  }
 
   return (
     <div className="w-screen md:px-10 mt-10">
@@ -51,7 +54,10 @@ const App = () => {
         </div>
         <Button
           className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
-          onClick={handleTranslate}
+          onClick={() => {
+            submit(prompted);
+          }}
+          disabled={isLoading}
         >
           Translate
         </Button>
@@ -68,11 +74,16 @@ const App = () => {
           </select>
           <CodeEditor
             language={translatedLanguage}
-            value={generation || "// Translated code will appear here"}
-            onChange={(value: any) => setGeneration(value)}
+            value={object?.code || ""}
+            onChange={(value: any) => setTranslatedCode(value)}
           />
         </div>
       </div>
+      {object?.explanation && (
+        <div className="mt-10">
+          <Markdown>{object.explanation}</Markdown>
+        </div>
+      )}
     </div>
   );
 };
