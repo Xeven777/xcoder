@@ -24,6 +24,7 @@ const CodeEditor = ({ language, value, onChange }: any) => {
       }
       options={{
         selectOnLineNumbers: true,
+        wordWrap: "on",
       }}
     />
   );

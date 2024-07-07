@@ -15,9 +15,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Copy } from "lucide-react";
+import { DM_Mono } from "next/font/google";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
+
+const font = DM_Mono({ subsets: ["latin"], weight: ["400"] });
 
 const App = () => {
   const { object, submit, isLoading, error } = useObject({
@@ -28,34 +31,28 @@ const App = () => {
     }),
   });
   const [sourceCode, setSourceCode] = useState("// Write your code here");
-  const [translatedCode, setTranslatedCode] = useState<string>();
+  const [translatedCode, setTranslatedCode] = useState<string>("");
   const [sourceLanguage, setSourceLanguage] = useState("javascript");
   const [translatedLanguage, setTranslatedLanguage] = useState("javascript");
 
-  const prompted = ` convert this code from ${sourceLanguage} to ${translatedLanguage} : \n ${sourceCode}`;
+  const prompted = `convert this code from ${sourceLanguage} to ${translatedLanguage} : \n ${sourceCode}`;
 
   if (error) {
     toast.error("Failed to generate code");
   }
 
   function copy(text: string) {
-    navigator.clipboard.writeText(text).then(
-      function () {
-        toast.success("Copied to clipboard");
-      },
-      function (err) {
-        toast.error("Failed to copy to clipboard");
-      }
-    );
+    console.log(text);
+    navigator.clipboard.writeText(text);
   }
 
   return (
-    <div className="w-screen md:px-10 mt-10">
+    <div className="max-w-screen w-full md:px-10 my-10">
       <div className="grid gap-20 grid-cols-2 relative">
         <div className="flex flex-col">
           <div className="flex">
-            <Select onValueChange={setSourceLanguage} defaultValue="python">
-              <SelectTrigger  >
+            <Select onValueChange={setSourceLanguage} defaultValue="javascript">
+              <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -105,11 +102,13 @@ const App = () => {
               <Copy />
             </Button>
           </div>
-          <CodeEditor
-            language={sourceLanguage}
-            value={sourceCode}
-            onChange={(value: any) => setSourceCode(value)}
-          />
+          <div className="rounded-b-xl overflow-hidden hover:shadow-xl transm shadow-md dark:shadow-emerald-800/30">
+            <CodeEditor
+              language={sourceLanguage}
+              value={sourceCode}
+              onChange={(value: any) => setSourceCode(value)}
+            />
+          </div>
         </div>
         <Button
           className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
@@ -118,14 +117,11 @@ const App = () => {
           }}
           disabled={isLoading}
         >
-          Translate
+          Convert
         </Button>
         <div className="flex flex-col">
           <div className="flex">
-            <Select
-              onValueChange={setTranslatedLanguage}
-              defaultValue="javascript"
-            >
+            <Select onValueChange={setTranslatedLanguage} defaultValue="cpp">
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -171,21 +167,33 @@ const App = () => {
             <Button
               variant={"ghost"}
               size={"icon"}
-              onClick={() => copy(translatedCode || "")}
+              onClick={() => copy(translatedCode)}
             >
               <Copy />
             </Button>
           </div>
-          <CodeEditor
-            language={translatedLanguage}
-            value={object?.code || ""}
-            onChange={(value: any) => setTranslatedCode(value)}
-          />
+          <div className="rounded-b-xl overflow-hidden hover:shadow-xl transm shadow-md dark:shadow-primary/30">
+            <CodeEditor
+              language={translatedLanguage}
+              value={object?.code || ""}
+              onChange={(value: any) => setTranslatedCode(value)}
+            />
+          </div>
         </div>
       </div>
       {object?.explanation && (
-        <div className="mt-10">
-          <Markdown>{object.explanation}</Markdown>
+        <div className="mt-4 p-2 md:p-10 mx-auto border-2 border-dashed rounded-lg border-s-primary">
+          <h1 className="text-2xl py-2 md:text-4xl font-semibold">
+            Explanation:{" "}
+          </h1>
+          <div
+            className={
+              font.className +
+              " text-lg whitespace-pre-wrap leading-snug text-pretty"
+            }
+          >
+            <Markdown>{object.explanation}</Markdown>
+          </div>
         </div>
       )}
     </div>

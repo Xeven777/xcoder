@@ -18,11 +18,8 @@ export default function ThemeTogglebutton({
         setTheme(theme === "dark" ? "light" : "dark");
       }}
     >
-      <Sun
-        className="w-6 h-6 scale-100 transition-all dark:scale-0"
-        color="#F9802D"
-      />
-      <Moon className="absolute w-6 h-6 scale-0 transition-all dark:scale-100" />
+      <Sun className="w-6 h-6 scale-100 transm dark:scale-0" color="#F9802D" />
+      <Moon className="absolute w-6 h-6 scale-0 transm dark:scale-100" />
       <span className="sr-only">Toggle Theme</span>
     </Button>
   );
