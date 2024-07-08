@@ -49,7 +49,7 @@ const Convertor = () => {
   }
 
   return (
-    <div className="max-w-screen min-h-screen w-full md:px-14 my-20">
+    <div className="max-w-screen px-2 min-h-screen w-full md:px-14 my-16" id="coder">
       <div className="grid gap-20 grid-cols-1 sm:grid-cols-2 relative">
         <div className="flex flex-col">
           <div className="flex">
@@ -219,7 +219,7 @@ const Convertor = () => {
           <div
             className={
               font.className +
-              " text-lg whitespace-pre-wrap leading-snug text-pretty"
+              " text-lg whitespace-pre leading-[1.2px] text-pretty"
             }
           >
             <Markdown>{object.explanation || "Nothing...."}</Markdown>

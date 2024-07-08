@@ -8,7 +8,7 @@ const CodeEditor = ({ language, value, onChange }: any) => {
 
   return (
     <Editor
-      height="80vh"
+      height="75vh"
       language={language}
       value={value}
       theme={theme === "dark" ? "vs-dark" : "light"}

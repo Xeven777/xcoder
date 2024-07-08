@@ -54,11 +54,11 @@
     @apply border-border scroll-smooth;
   }
   body {
-    @apply bg-gradient-to-b from-background to-muted/30 text-foreground;
+    @apply bg-gradient-to-b caret-primary from-background text-foreground;
   }
 
   ::selection {
-    @apply bg-primary text-white;
+    @apply bg-primary text-black;
   }
   ::-webkit-scrollbar {
     @apply w-2;
