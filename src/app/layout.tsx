@@ -10,6 +10,7 @@ const font = Manrope({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Xcoder - AI Code Convertor",
   description: "Convert your code to more than 35 languages with AI in a go!",
+  metadataBase: new URL("https://xcoder7.vercel.app"),
 };
 
 export default function RootLayout({
