@@ -16,6 +16,9 @@ import {
 } from "@/components/ui/select";
 import { Atom, Code2Icon, Copy } from "lucide-react";
 import { DM_Mono } from "next/font/google";
+import ShineBorder from "./magicui/shine-border";
+import { useTheme } from "next-themes";
+
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
@@ -29,6 +32,8 @@ const Convertor = () => {
       explanation: z.string(),
     }),
   });
+
+  const theme = useTheme();
   const [sourceCode, setSourceCode] = useState("// Write your code here");
   const [translatedCode, setTranslatedCode] = useState<string>("");
   const [sourceLanguage, setSourceLanguage] = useState("javascript");
@@ -47,8 +52,8 @@ const Convertor = () => {
   }
 
   return (
-    <div className="max-w-screen min-h-screen w-full md:px-10 my-10">
-      <div className="grid gap-20 grid-cols-2 relative">
+    <div className="max-w-screen min-h-screen w-full md:px-14 my-10">
+      <div className="grid gap-20 grid-cols-1 sm:grid-cols-2 relative">
         <div className="flex flex-col">
           <div className="flex">
             <Select onValueChange={setSourceLanguage} defaultValue="javascript">
@@ -103,13 +108,18 @@ const Convertor = () => {
               <Copy />
             </Button>
           </div>
-          <div className="rounded-b-xl overflow-hidden hover:shadow-xl transm shadow-md dark:shadow-emerald-800/30">
-            <CodeEditor
-              language={sourceLanguage}
-              value={sourceCode}
-              onChange={(value: any) => setSourceCode(value)}
-            />
-          </div>
+          <ShineBorder
+            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg p-0.5 bg-background shadow-md hover:shadow-xl transm dark:shadow-none"
+            color={theme.theme === "dark" ? "white" : "black"}
+          >
+            <div className="rounded-b-xl overflow-hidden w-full">
+              <CodeEditor
+                language={sourceLanguage}
+                value={sourceCode}
+                onChange={(value: any) => setSourceCode(value)}
+              />
+            </div>
+          </ShineBorder>
         </div>
         <Button
           className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
@@ -182,13 +192,18 @@ const Convertor = () => {
               <Copy />
             </Button>
           </div>
-          <div className="rounded-b-xl overflow-hidden hover:shadow-xl transm shadow-md dark:shadow-primary/30">
-            <CodeEditor
-              language={translatedLanguage}
-              value={object?.code || ""}
-              onChange={(value: any) => setTranslatedCode(value)}
-            />
-          </div>
+          <ShineBorder
+            className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg p-0.5 bg-background shadow-md hover:shadow-xl transm dark:shadow-none"
+            color={theme.theme === "dark" ? ["white", "#bef7d1"] : "black"}
+          >
+            <div className="rounded-b-xl w-full overflow-hidden">
+              <CodeEditor
+                language={translatedLanguage}
+                value={object?.code || ""}
+                onChange={(value: any) => setTranslatedCode(value)}
+              />
+            </div>
+          </ShineBorder>
         </div>
       </div>
       {object?.explanation && (

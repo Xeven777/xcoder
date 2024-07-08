@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import ThemeTogglebutton from "@/components/ui/ThemeToggle";
 import { Toaster } from "@/components/ui/sonner";
 import CanvasCursor from "@/components/CursorCanvas";
 
-const font = Bricolage_Grotesque({ subsets: ["latin"] });
+const font = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Nextjs + Shadcn",
@@ -21,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ThemeProvider attribute="class">
-          <ThemeTogglebutton className="absolute top-2 right-6" />
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <ThemeTogglebutton className="absolute top-2 right-6 z-[100]" />
           {children}
           <CanvasCursor />
           <Toaster richColors position="top-center" />

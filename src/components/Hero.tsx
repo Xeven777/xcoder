@@ -1,31 +1,13 @@
-// const Hero = () => {
-//   return (
-//     <div className=" min-h-screen flex flex-col items-center justify-center">
-//       <div className="text-center space-y-6">
-//         <h1 className="text-5xl md:text-7xl font-bold">
-//           Magic UI is the new way to build landing pages.
-//         </h1>
-//         <p className="text-lg md:text-2xl">
-//           Beautifully designed, animated components and templates built with
-//           Tailwind CSS, React, and Framer Motion.
-//         </p>
-//         <button className="mt-6 px-8 py-3 bg-white text-black rounded-full hover:bg-gray-200">
-//           Get Started for free
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Hero;
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 import Particles from "@/components/magicui/particles";
-
+import { Oxygen_Mono } from "next/font/google";
+import { cn } from "@/lib/utils";
+import Convertor from "./Convertor";
+const font = Oxygen_Mono({ subsets: ["latin"], weight: ["400"] });
 const ParticlesDemo = () => {
   const { theme } = useTheme();
   const [color, setColor] = useState("#ffffff");
@@ -35,13 +17,16 @@ const ParticlesDemo = () => {
   }, [theme]);
 
   return (
-    <div className="relative flex min-h-svh w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl text-center">
-      <h1 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
-        Particles
+    <div className="relative flex min-h-svh w-full flex-col items-center pt-20 md:pt-32 overflow-hidden rounded-lg border bg-background md:shadow-xl text-center">
+      <h1 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-zinc-400/80 bg-clip-text text-center text-6xl max-w-xl font-semibold leading-none text-transparent dark:from-white dark:to-zinc-600/80">
+        Transform{" "}
+        <span className={cn(font.className, "text-7xl text-primary/80")}>
+          {"{"}Code{"}"}
+        </span>{" "}
+        Effortlessly with AI
       </h1>
-      <p className="md:text-lg  text-muted-foreground max-w-prose">
-        Beautifully designed, animated components and templates built with
-        Tailwind CSS, React, and Framer Motion.
+      <p className="md:text-lg pt-5 text-muted-foreground max-w-prose">
+        Paste your code and convert them in a go!
       </p>
       <Particles
         className="absolute inset-0"
@@ -50,6 +35,7 @@ const ParticlesDemo = () => {
         color={color}
         refresh
       />
+      <Convertor />
     </div>
   );
 };
