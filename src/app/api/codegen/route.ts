@@ -2,6 +2,7 @@ import { google } from "@ai-sdk/google";
 import { streamObject } from "ai";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
