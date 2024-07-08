@@ -64,7 +64,7 @@
     @apply w-2;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary rounded-full;
+    @apply bg-muted rounded-full;
   }
 }
 

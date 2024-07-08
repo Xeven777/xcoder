@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import CodeEditor from "@/components/Codeeditor";
 import { Button } from "@/components/ui/button";
@@ -14,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Atom, Code2Icon, Copy } from "lucide-react";
+import { ArrowRightIcon, Atom, Code2Icon, Copy, Loader } from "lucide-react";
 import { DM_Mono } from "next/font/google";
 import ShineBorder from "./magicui/shine-border";
 import { useTheme } from "next-themes";
@@ -46,13 +44,12 @@ const Convertor = () => {
   }
 
   function copy(text: string) {
-    console.log(text);
     navigator.clipboard.writeText(text);
     toast.success("Copied to clipboard");
   }
 
   return (
-    <div className="max-w-screen min-h-screen w-full md:px-14 my-10">
+    <div className="max-w-screen min-h-screen w-full md:px-14 my-20">
       <div className="grid gap-20 grid-cols-1 sm:grid-cols-2 relative">
         <div className="flex flex-col">
           <div className="flex">
@@ -110,9 +107,9 @@ const Convertor = () => {
           </div>
           <ShineBorder
             className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg p-0.5 bg-background shadow-md hover:shadow-xl transm dark:shadow-none"
-            color={theme.theme === "dark" ? "white" : "black"}
+            color={theme.theme === "light" ? "black" : ["white", "#c9c9c9"]}
           >
-            <div className="rounded-b-xl overflow-hidden w-full">
+            <div className="rounded-b-lg overflow-hidden w-full">
               <CodeEditor
                 language={sourceLanguage}
                 value={sourceCode}
@@ -121,23 +118,31 @@ const Convertor = () => {
             </div>
           </ShineBorder>
         </div>
-        <Button
-          className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+        <button
+          type="button"
+          title="convert"
           onClick={() => {
             submit(prompted);
           }}
           disabled={isLoading}
+          className="overflow-hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-36 p-2 h-12 bg-gradient-to-br from-black via-zinc-900 to-zinc-950 border text-white rounded-md text-xl font-semibold cursor-pointer z-10 group disabled:opacity-65 flex items-center justify-center active:scale-95"
         >
-          {isLoading ? (
-            <>
-              <Atom className="animate-spin" />
-            </>
-          ) : (
-            <>
-              Convert <Code2Icon className="ml-2" />
-            </>
-          )}
-        </Button>
+          Convert! <ArrowRightIcon className="ml-2 size-6" />
+          <span className="absolute w-40 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+          <span className="absolute w-40 h-32 -top-8 -left-2 bg-primary/40 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+          <span className="absolute w-40 h-32 -top-8 -left-2 bg-primary rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+          <span className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10 flex items-center justify-center text-black">
+            {isLoading ? (
+              <>
+                <Loader className="animate-spin ml-8" />
+              </>
+            ) : (
+              <>
+                Code <Code2Icon className="ml-2" />
+              </>
+            )}
+          </span>
+        </button>
         <div className="flex flex-col">
           <div className="flex">
             <Select onValueChange={setTranslatedLanguage} defaultValue="cpp">
@@ -194,9 +199,9 @@ const Convertor = () => {
           </div>
           <ShineBorder
             className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg p-0.5 bg-background shadow-md hover:shadow-xl transm dark:shadow-none"
-            color={theme.theme === "dark" ? ["white", "#bef7d1"] : "black"}
+            color={theme.theme === "light" ? "black" : ["white", "#88f7ab"]}
           >
-            <div className="rounded-b-xl w-full overflow-hidden">
+            <div className="rounded-b-lg w-full overflow-hidden">
               <CodeEditor
                 language={translatedLanguage}
                 value={object?.code || ""}
