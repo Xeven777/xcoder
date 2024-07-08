@@ -35,7 +35,7 @@ const Convertor = () => {
   const [sourceCode, setSourceCode] = useState("// Write your code here");
   const [translatedCode, setTranslatedCode] = useState<string>("");
   const [sourceLanguage, setSourceLanguage] = useState("javascript");
-  const [translatedLanguage, setTranslatedLanguage] = useState("javascript");
+  const [translatedLanguage, setTranslatedLanguage] = useState("python");
 
   const prompted = `convert this code from ${sourceLanguage} to ${translatedLanguage} : \n ${sourceCode}`;
 
@@ -49,7 +49,10 @@ const Convertor = () => {
   }
 
   return (
-    <div className="max-w-screen px-2 min-h-screen w-full md:px-14 my-16" id="coder">
+    <div
+      className="max-w-screen px-2 min-h-screen w-full md:px-20 my-16"
+      id="coder"
+    >
       <div className="grid gap-20 grid-cols-1 sm:grid-cols-2 relative">
         <div className="flex flex-col">
           <div className="flex">
@@ -145,7 +148,7 @@ const Convertor = () => {
         </button>
         <div className="flex flex-col">
           <div className="flex">
-            <Select onValueChange={setTranslatedLanguage} defaultValue="cpp">
+            <Select onValueChange={setTranslatedLanguage} defaultValue="python">
               <SelectTrigger className="rounded-e-none border-e-0">
                 <SelectValue />
               </SelectTrigger>
@@ -219,7 +222,7 @@ const Convertor = () => {
           <div
             className={
               font.className +
-              " text-lg whitespace-pre leading-[1.2px] text-pretty"
+              " text-lg whitespace-pre leading-[1.4rem] text-pretty"
             }
           >
             <Markdown>{object.explanation || "Nothing...."}</Markdown>

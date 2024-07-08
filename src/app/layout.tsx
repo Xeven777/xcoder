@@ -24,7 +24,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           <nav className="sticky top-0 backdrop-blur-md border-b bg-background/20 rounded-b-xl z-50 flex items-center justify-between py-2 w-full px-6 md:px-10 shadow-md">
             <h1 className="text-lg font-semibold md:text-2xl cursor-crosshair">
-              <span className="text-primary">X</span>coder.{" "}
+              <span className="text-primary">X</span>coder.
               <span className="text-primary">_</span>
             </h1>
             <ThemeTogglebutton />
