@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import ThemeTogglebutton from "@/components/ui/ThemeToggle";
 import { Toaster } from "@/components/ui/sonner";
-import CanvasCursor from "@/components/CursorCanvas";
 
 const font = Manrope({ subsets: ["latin"] });
 
@@ -21,10 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+        <ThemeProvider attribute="class">
           <ThemeTogglebutton className="absolute top-2 right-6 z-[100]" />
           {children}
-          <CanvasCursor />
           <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>

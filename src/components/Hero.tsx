@@ -18,7 +18,7 @@ const ParticlesDemo = () => {
 
   return (
     <div className="relative flex min-h-svh w-full flex-col items-center pt-20 md:pt-32 overflow-hidden rounded-lg border bg-background md:shadow-xl text-center">
-      <h1 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-zinc-400/80 bg-clip-text text-center text-6xl max-w-xl font-semibold leading-none text-transparent dark:from-white dark:to-zinc-600/80">
+      <h1 className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-zinc-400/80 bg-clip-text text-center text-6xl max-w-xl font-semibold leading-none text-transparent dark:from-white dark:to-zinc-600/80 tracking-tight">
         Transform{" "}
         <span className={cn(font.className, "text-7xl text-primary/80")}>
           {"{"}Code{"}"}
@@ -30,7 +30,7 @@ const ParticlesDemo = () => {
       </p>
       <Particles
         className="absolute inset-0"
-        quantity={100}
+        quantity={400}
         ease={80}
         color={color}
         refresh
