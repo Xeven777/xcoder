@@ -1,6 +1,6 @@
 {
-  "name": "next-shadcn",
-  "version": "0.1.0",
+  "name": "xcoder",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.63",
+    "@ai-sdk/google": "^0.0.51",
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
-    "ai": "^3.4.2",
+    "ai": "^3.4.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.400.0",
+    "lucide-react": "^0.446.0",
     "next": "14.2.13",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
