@@ -2,6 +2,7 @@ import { useState } from "react";
 import CodeEditor from "@/components/Codeeditor";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
+import React from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { experimental_useObject as useObject } from "ai/react";

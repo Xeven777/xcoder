@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import { Spotlight } from "@/components/ui/Spotlight";
+import React from "react";
 
 const page = () => {
   return (

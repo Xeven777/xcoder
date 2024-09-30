@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-
 import Particles from "@/components/magicui/particles";
 import { Oxygen_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -37,7 +36,13 @@ const ParticlesDemo = () => {
         className="z-20 rounded-full mt-4 px-6"
         variant={"secondary"}
       >
-        <a href="https://git.new/anish">Github</a>
+        <a
+          rel="noopener"
+          href="https://github.com/Xeven777/xcoder"
+          target="_blank"
+        >
+          Github
+        </a>
       </Button>
       <Particles
         className="absolute inset-0"
